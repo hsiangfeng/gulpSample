@@ -67,8 +67,8 @@ gulp.task('clean', () => {
       .pipe($.clean());
 });
 
-gulp.task('deploy', function() {
-  return gulp.src('./public/')
+gulp.task('deploy', () => {
+  return gulp.src('./public/**/*')
     .pipe($.ghPages());
 });
 
