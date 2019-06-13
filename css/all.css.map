@@ -1,0 +1,1 @@
+{"version":3,"sources":["all.scss"],"names":[],"mappings":"AAEA,KACE,qBAAqB,AACrB,oBAAa,AAAb,YAAa,CAAA,AAFf,WAII,WAAW,AACX,qBAPW,CAAA","file":"all.css","sourcesContent":["$color: #00cc99;\r\n\r\n.box {\r\n  background-color: red;\r\n  display: flex;\r\n  &:hover {\r\n    width: 10px;\r\n    background-color: $color;\r\n  }\r\n}"]}
