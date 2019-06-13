@@ -1,0 +1,10 @@
+$color: #00cc99;
+
+.box {
+  background-color: red;
+  display: flex;
+  &:hover {
+    width: 10px;
+    background-color: $color;
+  }
+}
