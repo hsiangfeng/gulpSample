@@ -1,6 +1,6 @@
 # Gulp 4 範例
 
-![圖源網路](https://lc-gold-cdn.xitu.io/525072a07f737c146231.png)
+![圖源網路](https://i.imgur.com/5JvvHSg.png)
 
 這個 Gulp 範例是基於 **Gulp 4** 所製作，文章教學可以參考以下
 
