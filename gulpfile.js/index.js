@@ -55,7 +55,7 @@ function browser() {
 }
 
 function clean() {
-  return gulp.src('./public', { read: false })
+  return gulp.src('./public', { read: false ,allowEmpty: true })
     .pipe($.clean());
 }
 
