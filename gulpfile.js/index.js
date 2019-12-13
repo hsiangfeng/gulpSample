@@ -3,25 +3,18 @@ const $ = require('gulp-load-plugins')({ lazy: false });
 const autoprefixer = require('autoprefixer');
 const minimist = require('minimist');
 const browserSync = require('browser-sync').create();
-$.sass.compiler = require('node-sass');
-
-let envOptions = {
-  string: 'env',
-  default: {
-    env: 'dev'
-  }
-};
+const { envOptions } = require('./envOptions');
 
 let options = minimist(process.argv.slice(2), envOptions);
 //現在開發狀態
 console.log(options);
 
-gulp.task('copyHTML', () => {
+function copyHTML() {
   return gulp.src('./src/**/*.html')
     .pipe(gulp.dest('./public/'));
-});
+}
 
-gulp.task('scss', () => {
+function scss() {
   const plugins = [
     autoprefixer(),
   ];
@@ -32,52 +25,53 @@ gulp.task('scss', () => {
     .pipe($.if(options.env === 'prod', $.cssnano()))
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest('./public/css'));
-});
+}
 
-gulp.task('babel', () => {
+function babel() {
   return gulp.src('./src/js/**/*.js')
     .pipe($.sourcemaps.init())
     .pipe($.babel({
       presets: ['@babel/env']
     }))
     .pipe($.concat('all.js'))
-    .pipe($.if(options.env === 'prod',$.uglify()))
+    .pipe($.if(options.env === 'prod', $.uglify()))
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest('./public/js'));
-});
+}
 
-
-gulp.task('image',() => {
+function image() {
   return gulp.src('./src/img/**/*')
-  .pipe($.if(options.env ==='prod', $.image()))
-  .pipe(gulp.dest('./public/img/'));
-});
+    .pipe($.if(options.env === 'prod', $.image()))
+    .pipe(gulp.dest('./public/img/'));
+}
 
-gulp.task('browser-sync', () => {
+function browser() {
   browserSync.init({
-      server: {
-          baseDir: "./public"
-      },
-      port: 8080
+    server: {
+      baseDir: "./public"
+    },
+    port: 8080
   });
-});
+}
 
-gulp.task('clean', () => {
-  return gulp.src('./public', {read: false})
-      .pipe($.clean());
-});
+function clean() {
+  return gulp.src('./public', { read: false })
+    .pipe($.clean());
+}
 
-gulp.task('deploy', () => {
+function deploy() {
   return gulp.src('./public/**/*')
     .pipe($.ghPages());
-});
+}
 
-gulp.task('watch', gulp.parallel('browser-sync', () =>{
+function watch() {
   gulp.watch('./src/**/*.html', gulp.series('copyHTML'));
-  gulp.watch('./src/scss/**/*.scss',  gulp.series('scss'));
+  gulp.watch('./src/scss/**/*.scss', gulp.series('scss'));
   gulp.watch('./src/js/**/*.js', gulp.series('babel'));
-}));
+}
 
-gulp.task('bulid', gulp.series('clean', 'copyHTML', 'scss', 'babel', 'image'));
+exports.deploy = deploy;
 
-gulp.task('default',gulp.series('copyHTML', 'scss', 'babel', 'image', 'watch'));
+exports.bulid = gulp.series(clean, copyHTML, scss, babel, image);
+
+exports.default = gulp.series(copyHTML, scss, babel, image, browser, watch);
