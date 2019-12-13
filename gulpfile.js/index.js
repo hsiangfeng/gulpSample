@@ -72,6 +72,6 @@ function watch() {
 
 exports.deploy = deploy;
 
-exports.bulid = gulp.series(clean, copyHTML, scss, babel, image);
+exports.build = gulp.series(clean, copyHTML, scss, babel, image);
 
 exports.default = gulp.series(copyHTML, scss, babel, image, browser, watch);
