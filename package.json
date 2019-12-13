@@ -8,10 +8,13 @@
     "build": "gulp build --env prod",
     "start": "node serve.js"
   },
+  "engines": {
+    "node": "11.7.0"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
     "autoprefixer": "^9.6.0",
