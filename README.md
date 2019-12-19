@@ -39,8 +39,9 @@
 - gh-pages / GitHub Page 篇的 **範例分支**。
 - newGulpfile / 改用 Gulp 4 寫法的範例分支，主要是介紹 **將 Gulp deploy (部屬) Heroku**。
 
-其他：
+## DEMO 相關
 
+- [Gulp 部屬 GitHub Pages 的 DEMO 網址](https://hsiangfeng.github.io/gulpSample/)
 - [Gulp 部屬 Heroku 的 DEMO 網址](https://gulpdeployheroku.herokuapp.com)
 
 ## 結尾
